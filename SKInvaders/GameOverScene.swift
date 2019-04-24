@@ -28,20 +28,6 @@ class GameOverScene: SKScene {
     
     var contentCreated = false
     
-    enum InvaderType {
-        case a
-        case b
-        case c
-        
-        static var size: CGSize {
-            return CGSize(width: 24, height: 16)
-        }
-        
-        static var name: String {
-            return "invader"
-        }
-    }
-    
     // Object Lifecycle Management
     
     // Scene Setup and Content Creation
@@ -76,8 +62,6 @@ class GameOverScene: SKScene {
         self.backgroundColor = SKColor.black
 
     }
-    
-
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         

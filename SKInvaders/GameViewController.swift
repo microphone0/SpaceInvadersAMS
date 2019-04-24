@@ -63,12 +63,12 @@ class GameViewController: UIViewController {
     // Release any cached data, images, etc that aren't in use.
   }
   
-  func handleApplicationWillResignActive (_ note: Notification) {
+  @objc func handleApplicationWillResignActive (_ note: Notification) {
     let skView = self.view as! SKView
     skView.isPaused = true
   }
   
-  func handleApplicationDidBecomeActive (_ note: Notification) {
+  @objc func handleApplicationDidBecomeActive (_ note: Notification) {
     let skView = self.view as! SKView
     skView.isPaused = false
   }
