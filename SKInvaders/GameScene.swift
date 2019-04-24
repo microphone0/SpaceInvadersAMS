@@ -30,6 +30,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let kMinInvaderBottomHeight: Float = 32.0
     var gameEnding: Bool = false
     
+    let background = SKSpriteNode(imageNamed: "background")
+    
     var score: Int = 0
     var shipHealth: Float = 1.0
     
@@ -191,7 +193,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch bulletType {
         case .shipFired:
-            bullet = SKSpriteNode(color: SKColor.green, size: kBulletSize)
+            bullet = SKSpriteNode(imageNamed: "fireBullet")
             bullet.name = kShipFiredBulletName
             bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.frame.size)
             bullet.physicsBody!.isDynamic = true
@@ -201,7 +203,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             bullet.physicsBody!.collisionBitMask = 0x0
 
         case .invaderFired:
-            bullet = SKSpriteNode(color: SKColor.magenta, size: kBulletSize)
+            bullet = SKSpriteNode(imageNamed: "iceBullet")
             bullet.name = kInvaderFiredBulletName
             bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.frame.size)
             bullet.physicsBody!.isDynamic = true
@@ -219,6 +221,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
       func createContent() {
         
+        //Set up background
+        background.zPosition = -1
+        background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        addChild(background)
+        
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         physicsBody!.categoryBitMask = kSceneEdgeCategory
         setupInvaders()
@@ -226,36 +233,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupHud()
         
         // black space color
-        self.backgroundColor = SKColor.black
+        //self.backgroundColor = SKColor.black
       }
     
-    func loadInvaderTextures(ofType invaderType: InvaderType) -> [SKTexture] {
-        
-        var prefix: String
-        
-        switch(invaderType) {
-        case .a:
-            prefix = "InvaderA"
-        case .b:
-            prefix = "InvaderB"
-        case .c:
-            prefix = "InvaderC"
-        }
-        
-        // 1
-        return [SKTexture(imageNamed: String(format: "%@_00.png", prefix)),
-                SKTexture(imageNamed: String(format: "%@_01.png", prefix))]
-    }
+//    func loadInvaderTextures(ofType invaderType: InvaderType) -> [SKTexture] {
+//        
+//        var prefix: String
+//        
+//        switch(invaderType) {
+//        case .a:
+//            prefix = "InvaderA"
+//        case .b:
+//            prefix = "InvaderB"
+//        case .c:
+//            prefix = "InvaderC"
+//        }
+//        
+//        // 1
+//        return [SKTexture(imageNamed: String(format: "%@_00.png", prefix)),
+//                SKTexture(imageNamed: String(format: "%@_01.png", prefix))]
+//    }
     
     func makeInvader(ofType invaderType: InvaderType) -> SKNode {
-        let invaderTextures = loadInvaderTextures(ofType: invaderType)
+        //let invaderTextures = loadInvaderTextures(ofType: invaderType)
         
         // 2
-        let invader = SKSpriteNode(texture: invaderTextures[0])
+        //let invader = SKSpriteNode(texture: invaderTextures[0])
+        let invader = SKSpriteNode(imageNamed: "iceBall")
         invader.name = InvaderType.name
         
         // 3
-        invader.run(SKAction.repeatForever(SKAction.animate(with: invaderTextures, timePerFrame: timePerMove)))
+        //invader.run(SKAction.repeatForever(SKAction.animate(with: invaderTextures, timePerFrame: timePerMove)))
         
         // invaders' bitmasks setup
         invader.physicsBody = SKPhysicsBody(rectangleOf: invader.frame.size)
@@ -314,7 +322,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func makeShip() -> SKNode {
-        let ship = SKSpriteNode(imageNamed: "Ship.png")
+        let ship = SKSpriteNode(imageNamed: "sun")
         ship.name = kShipName
         
         // 1
@@ -640,6 +648,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // Physics Contact Helpers
     func didBegin(_ contact: SKPhysicsContact) {
+        
         contactQueue.append(contact)
     }
 
