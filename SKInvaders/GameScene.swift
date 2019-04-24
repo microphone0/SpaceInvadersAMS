@@ -25,6 +25,9 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var isFingerOnMoveLeft = false
+    var isFingerOnMoveRight = false
+    
     var contactQueue = [SKPhysicsContact]()
     
     let kMinInvaderBottomHeight: Float = 32.0
@@ -88,6 +91,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let kShipSize = CGSize(width: 30, height: 16)
     let kShipName = "ship"
+    
+    let kshootName = "shoot"
+    let kleftName = "left"
+    let krightName = "right"
     
     let kScoreHudName = "scoreHud"
     let kHealthHudName = "healthHud"
@@ -181,6 +188,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // 2
             motionManager.stopAccelerometerUpdates()
             
+            isFingerOnMoveLeft = false
+            isFingerOnMoveRight = false
+            
             // 3
             let gameOverScene: GameOverScene = GameOverScene(size: size)
             
@@ -226,6 +236,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
         addChild(background)
         
+        buildController()
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         physicsBody!.categoryBitMask = kSceneEdgeCategory
         setupInvaders()
@@ -237,9 +248,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       }
     
 //    func loadInvaderTextures(ofType invaderType: InvaderType) -> [SKTexture] {
-//        
+//
 //        var prefix: String
-//        
+//
 //        switch(invaderType) {
 //        case .a:
 //            prefix = "InvaderA"
@@ -248,7 +259,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        case .c:
 //            prefix = "InvaderC"
 //        }
-//        
+//
 //        // 1
 //        return [SKTexture(imageNamed: String(format: "%@_00.png", prefix)),
 //                SKTexture(imageNamed: String(format: "%@_01.png", prefix))]
@@ -441,19 +452,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func processUserMotion(forUpdate currentTime: CFTimeInterval) {
-        // 1
-        if let ship = childNode(withName: kShipName) as? SKSpriteNode {
-            // 2
-            if let data = motionManager.accelerometerData {
-                // 3
-                if fabs(data.acceleration.x) > 0.2 {
-                    // 4 How do you move the ship?
-                    ship.physicsBody!.applyForce(CGVector(dx: 40 * CGFloat(data.acceleration.x), dy: 0))
-                }
-            }
-        }
-    }
+//    func processUserMotion(forUpdate currentTime: CFTimeInterval) {
+//        // 1
+//        if let ship = childNode(withName: kShipName) as? SKSpriteNode {
+//            // 2
+//            if let data = motionManager.accelerometerData {
+//                // 3
+//                if fabs(data.acceleration.x) > 0.2 {
+//                    // 4 How do you move the ship?
+//                    ship.physicsBody!.applyForce(CGVector(dx: 40 * CGFloat(data.acceleration.x), dy: 0))
+//                }
+//            }
+//        }
+//    }
     
     func fireInvaderBullets(forUpdate currentTime: CFTimeInterval) {
         let existingBullet = childNode(withName: kInvaderFiredBulletName)
@@ -502,9 +513,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         processContacts(forUpdate: currentTime)
         
-        processUserTaps(forUpdate: currentTime)
+        //processUserTaps(forUpdate: currentTime)
         
-        processUserMotion(forUpdate: currentTime)
+        //processUserMotion(forUpdate: currentTime)
 
         /* Called before each frame is rendered */
         moveInvaders(forUpdate: currentTime)
@@ -513,17 +524,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     // Scene Update Helpers
-    func processUserTaps(forUpdate currentTime: CFTimeInterval) {
-        // 1
-        for tapCount in tapQueue {
-            if tapCount == 1 {
-                // 2
-                fireShipBullets()
-            }
-            // 3
-            tapQueue.remove(at: 0)
-        }
-    }
+//    func processUserTaps(forUpdate currentTime: CFTimeInterval) {
+//        // 1
+//        for tapCount in tapQueue {
+//            if tapCount == 1 {
+//                // 2
+//                fireShipBullets()
+//            }
+//            // 3
+//            tapQueue.remove(at: 0)
+//        }
+//    }
     
     func processContacts(forUpdate currentTime: CFTimeInterval) {
         for contact in contactQueue {
@@ -634,24 +645,84 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let left = childNode(withName: kleftName)
+        let right = childNode(withName: krightName)
+        
+        let touch = touches.first
+        let touchLocation = touch!.location(in: self)
+        // Check if the location of the touch is within the button's bounds
+        if left!.contains(touchLocation) {
+            isFingerOnMoveLeft = true
+        }
+        
+        if right!.contains(touchLocation) {
+            isFingerOnMoveRight = true
+        }
+        
+        let ship = childNode(withName: kShipName)
+        
+        if isFingerOnMoveLeft {
+            ship!.physicsBody!.applyForce(CGVector(dx: -40, dy: 0))
+        }
+        
+        if isFingerOnMoveRight {
+            ship!.physicsBody!.applyForce(CGVector(dx: 40, dy: 0))
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
 
     // User Tap Helpers
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            if (touch.tapCount == 1) {
-                tapQueue.append(1)
+        
+        isFingerOnMoveLeft = false
+        isFingerOnMoveRight = false
+        
+        let shoot = childNode(withName: kshootName)
+        
+        let touch = touches.first
+        let touchLocation = touch!.location(in: self)
+        // Check if the location of the touch is within the button's bounds
+        if shoot!.contains(touchLocation) {
+            fireShipBullets()
+            if let touch = touches.first {
+                if (touch.tapCount == 1) {
+                    tapQueue.append(1)
+                }
             }
         }
     }
   
     // HUD Helpers
+    func buildController() {
+        let shoot = SKSpriteNode(imageNamed: "shoot")
+        shoot.name = kshootName
+        shoot.zPosition = 3
+        shoot.position = CGPoint(x: frame.size.width/1.2, y: frame.size.height/9)
+        addChild(shoot)
+        
+        let left = SKSpriteNode(imageNamed: "left")
+        left.name = kleftName
+        left.zPosition = 3
+        left.position = CGPoint(x: frame.size.width/8.7, y: frame.size.height/9)
+        addChild(left)
+        
+        let right = SKSpriteNode(imageNamed: "right")
+        right.name = krightName
+        right.zPosition = 3
+        right.position = CGPoint(x: frame.size.width/3.3, y: frame.size.height/9)
+        addChild(right)
+
+    }
 
     // Physics Contact Helpers
     func didBegin(_ contact: SKPhysicsContact) {
         
         contactQueue.append(contact)
     }
-
-    // Game End Helpers
-  
 }
