@@ -123,7 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if nodeNames.contains(kShipName) && nodeNames.contains(kInvaderFiredBulletName) {
             // Invader bullet hit a ship
-            run(SKAction.playSoundFileNamed("ShipHit.wav", waitForCompletion: false))
+            run(SKAction.playSoundFileNamed("Bow_Fire_Arrow.mp3", waitForCompletion: false))
             
             // 1
             adjustShipHealth(by: -0.334)
@@ -148,7 +148,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         } else if nodeNames.contains(InvaderType.name) && nodeNames.contains(kShipFiredBulletName) {
             // Ship bullet hit an invader
-            run(SKAction.playSoundFileNamed("InvaderHit.wav", waitForCompletion: false))
+            run(SKAction.playSoundFileNamed("Explosion+3.mp3", waitForCompletion: false))
             contact.bodyA.node!.removeFromParent()
             contact.bodyB.node!.removeFromParent()
             
@@ -499,7 +499,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     bullet: bullet,
                     toDestination: bulletDestination,
                     withDuration: 2.0,
-                    andSoundFileName: "InvaderBullet.wav"
+                    andSoundFileName: "ice-cubes.mp3"
                 )
             }
         }
@@ -640,7 +640,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     bullet: bullet,
                     toDestination: bulletDestination,
                     withDuration: 1.0,
-                    andSoundFileName: "ShipBullet.wav"
+                    andSoundFileName: "Fireball+2.wav"
                 )
             }
         }

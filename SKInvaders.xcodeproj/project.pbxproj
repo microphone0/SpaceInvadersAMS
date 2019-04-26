@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5F017F722736FE000F6EA32 /* Explosion+3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F017F622736FE000F6EA32 /* Explosion+3.mp3 */; };
+		B5F017FE2273712300F6EA32 /* Bow_Fire_Arrow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F017FC2273712300F6EA32 /* Bow_Fire_Arrow.mp3 */; };
+		B5F017FF2273712300F6EA32 /* ice-cubes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5F017FD2273712300F6EA32 /* ice-cubes.mp3 */; };
+		B5F018012273719C00F6EA32 /* Fireball+2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5F018002273719C00F6EA32 /* Fireball+2.wav */; };
 		CDF079D01975428800FFAB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF079CF1975428800FFAB46 /* AppDelegate.swift */; };
 		CDF079D41975428800FFAB46 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF079D31975428800FFAB46 /* GameScene.swift */; };
 		CDF079D61975428800FFAB46 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF079D51975428800FFAB46 /* GameViewController.swift */; };
@@ -35,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B5F017F622736FE000F6EA32 /* Explosion+3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Explosion+3.mp3"; sourceTree = "<group>"; };
+		B5F017FC2273712300F6EA32 /* Bow_Fire_Arrow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bow_Fire_Arrow.mp3; sourceTree = "<group>"; };
+		B5F017FD2273712300F6EA32 /* ice-cubes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ice-cubes.mp3"; sourceTree = "<group>"; };
+		B5F018002273719C00F6EA32 /* Fireball+2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Fireball+2.wav"; sourceTree = "<group>"; };
 		CDF079CA1975428800FFAB46 /* SKInvaders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKInvaders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF079CE1975428800FFAB46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDF079CF1975428800FFAB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +135,10 @@
 		CDF079F21975453100FFAB46 /* Sound Effects */ = {
 			isa = PBXGroup;
 			children = (
+				B5F017FC2273712300F6EA32 /* Bow_Fire_Arrow.mp3 */,
+				B5F017FD2273712300F6EA32 /* ice-cubes.mp3 */,
+				B5F018002273719C00F6EA32 /* Fireball+2.wav */,
+				B5F017F622736FE000F6EA32 /* Explosion+3.mp3 */,
 				CDF079F31975453100FFAB46 /* InvaderBullet.wav */,
 				CDF079F41975453100FFAB46 /* InvaderHit.wav */,
 				CDF079F51975453100FFAB46 /* ShipBullet.wav */,
@@ -223,6 +235,7 @@
 				CDF07A171975453100FFAB46 /* Ship.png in Resources */,
 				CDF07A0D1975453100FFAB46 /* InvaderA_01.png in Resources */,
 				CDF07A081975453100FFAB46 /* InvaderHit.wav in Resources */,
+				B5F017F722736FE000F6EA32 /* Explosion+3.mp3 in Resources */,
 				CDF07A0E1975453100FFAB46 /* InvaderA_01@2x.png in Resources */,
 				CDF07A111975453100FFAB46 /* InvaderB_01.png in Resources */,
 				CDF07A161975453100FFAB46 /* InvaderC_01@2x.png in Resources */,
@@ -230,12 +243,15 @@
 				CDF07A131975453100FFAB46 /* InvaderC_00.png in Resources */,
 				CDF07A151975453100FFAB46 /* InvaderC_01.png in Resources */,
 				CDF07A101975453100FFAB46 /* InvaderB_00@2x.png in Resources */,
+				B5F017FE2273712300F6EA32 /* Bow_Fire_Arrow.mp3 in Resources */,
 				CDF07A0B1975453100FFAB46 /* InvaderA_00.png in Resources */,
 				CDF07A121975453100FFAB46 /* InvaderB_01@2x.png in Resources */,
 				CDF07A0C1975453100FFAB46 /* InvaderA_00@2x.png in Resources */,
 				CDF07A091975453100FFAB46 /* ShipBullet.wav in Resources */,
+				B5F017FF2273712300F6EA32 /* ice-cubes.mp3 in Resources */,
 				CDF07A141975453100FFAB46 /* InvaderC_00@2x.png in Resources */,
 				CDF079D91975428800FFAB46 /* Main.storyboard in Resources */,
+				B5F018012273719C00F6EA32 /* Fireball+2.wav in Resources */,
 				CDF07A0F1975453100FFAB46 /* InvaderB_00.png in Resources */,
 				CDF07A071975453100FFAB46 /* InvaderBullet.wav in Resources */,
 			);
